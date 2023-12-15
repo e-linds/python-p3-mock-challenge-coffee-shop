@@ -81,6 +81,25 @@ class Customer:
     def create_order(self, coffee, price):
         newinstance = Order(self, coffee, price)
         return newinstance
+    
+    @classmethod
+    def most_aficionado(cls, coffee):
+        customers = []
+        customer_count = []
+        all_customer_counts = []
+        
+        for each in Order.all:
+            if each.coffee == coffee:
+                name = each.customer.name
+                customers.append(name)
+                count = customers.count(name)
+                customer_count = [count, name]
+                all_customer_counts.append(customer_count)
+        all_customer_counts.sort(reverse=True)
+        for each in Customer.all:
+            if each.name == all_customer_counts[0][1]:
+                return each
+       
 
 
     def __repr__(self):
@@ -134,14 +153,24 @@ class Order:
 
     
     
-# customer1 = Customer("Teri")
-# customer2 = Customer("Dee")
-# coffee1 = Coffee("Black")
-# coffee2 = Coffee("Latte")
-# order1 = Order(customer1, coffee1, 5.50)
-# order2 = Order(customer2, coffee2, 10.0)
-# order_mixed = Order(customer1, coffee2, 3.5)
+customer1 = Customer("Teri")
+customer2 = Customer("Dee")
+coffee1 = Coffee("Black")
+coffee2 = Coffee("Latte")
+order1 = Order(customer1, coffee1, 5.50)
+order2 = Order(customer2, coffee2, 10.0)
+order_mixed = Order(customer1, coffee2, 3.5)
+order3 = Order(customer2, coffee2, 10.0)
+order4 = Order(customer2, coffee2, 10.0)
+order5 = Order(customer2, coffee2, 10.0)
+order6 = Order(customer1, coffee1, 5.50)
+
+order7 = Order(customer1, coffee1, 5.50)
 
 
-# print(coffee2.average_price())
+
+
+
+
+print(Customer.most_aficionado(coffee1))
 
