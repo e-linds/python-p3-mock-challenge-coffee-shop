@@ -94,7 +94,8 @@ class Order:
     def __init__(self, customer, coffee, price):
         self.customer = customer
         self.coffee = coffee
-        self.price = price
+        if type(price) is float and 1.0 <= len(str(price).replace('.','')) <= 10.0:
+            self._price = price
 
         Order.all.append(self)
 
@@ -103,9 +104,6 @@ class Order:
         return self._price
     
     def set_price(self, value):
-        if type(value) is float and 1.0 <= len(str(value).replace('.','')) <= 10.0 and hasattr(self, "price") == False:
-            self._price = value
-        else: 
             print("cannot change price")
 
     price = property(get_price, set_price)
