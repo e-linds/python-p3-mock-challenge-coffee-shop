@@ -92,9 +92,11 @@ class Customer:
             if each.coffee == coffee:
                 name = each.customer.name
                 customers.append(name)
-                count = customers.count(name)
-                customer_count = [count, name]
-                all_customer_counts.append(customer_count)
+                if len(customers) > 0:
+                    count = customers.count(name)
+                    customer_count = [count, name]
+                    all_customer_counts.append(customer_count)
+                else: return None
         all_customer_counts.sort(reverse=True)
         for each in Customer.all:
             if each.name == all_customer_counts[0][1]:
